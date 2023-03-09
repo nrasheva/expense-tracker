@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './App.css';
-import { add, isBefore, startOfDay } from 'date-fns';
+import { add, differenceInDays, isBefore, startOfDay } from 'date-fns';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(1);
   const [checked, setChecked] = useState(false);
   const [nextIncome, setNextIncome] = useState('');
+  const [remainingDays, setRemainingDays] = useState('');
 
   const handleConfirmation = (): void => {
     // Get midnight UTC date of user selection
@@ -24,6 +25,11 @@ function App() {
     }
 
     setNextIncome(nextIncome.toString());
+
+    const difference = differenceInDays(nextIncome, today);
+    const message = `${difference} remaining ${difference > 1 ? 'days' : 'day'}`;
+
+    setRemainingDays(message);
   };
 
   return (
@@ -41,6 +47,7 @@ function App() {
         <input checked={checked} id='received' onChange={(e) => setChecked(e.target.checked)} type='checkbox'></input>
         <label htmlFor='received'>Received for current period</label>
       </div>
+      {Boolean(remainingDays.length) && <h2>{remainingDays}</h2>}
       {nextIncome}
     </div>
   );
