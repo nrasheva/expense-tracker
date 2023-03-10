@@ -1,14 +1,14 @@
 export const convertTimestamp = (timestamp: number): string => {
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     day: '2-digit',
     month: 'long',
     timeZone: 'Europe/Sofia',
+    hour: '2-digit',
+    minute: '2-digit',
     year: 'numeric',
   };
 
-  const formatted = new Intl.DateTimeFormat('en-GB', options as Intl.DateTimeFormatOptions).format(
-    new Date(timestamp * 1000)
-  );
+  const formatted = new Intl.DateTimeFormat('en-GB', options).format(new Date(timestamp * 1000));
 
   return formatted;
 };

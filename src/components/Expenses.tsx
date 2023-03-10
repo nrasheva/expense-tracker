@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { convertTimestamp, formatCurrency } from '../tools';
 
 type Expense = {
@@ -53,11 +54,33 @@ const EXPENSES: Expense[] = [
 ];
 
 export const Expenses = (): JSX.Element => {
+  const [expenses, setExpenses] = useState(EXPENSES);
+  const [expense, setExpense] = useState({
+    amount: '',
+    category: '',
+  });
+
+  const handleChange = (key: string, value: string) => {
+    setExpense((prevState) => {
+      return { ...prevState, [key]: value };
+    });
+  };
+
+  const handleExpense = (): void => {
+    const newExpense: Expense = {
+      amount: expense.amount,
+      category: expense.category,
+      id: Math.floor(new Date().getTime() / 1000.0).toString(),
+      timestamp: Math.floor(new Date().getTime() / 1000.0),
+    };
+
+    setExpenses([...expenses, newExpense]);
+  };
+
   return (
     <section>
       <h3>Expenses</h3>
-
-      {EXPENSES.map((expense) => {
+      {expenses.map((expense) => {
         return (
           <div className='expense' key={expense.id}>
             <span>{expense.category}</span>
@@ -66,6 +89,10 @@ export const Expenses = (): JSX.Element => {
           </div>
         );
       })}
+      <p className='bold'>Add new expense</p>
+      <input onChange={(e) => handleChange('category', e.target.value)} type='text' value={expense.category} />
+      <input onChange={(e) => handleChange('amount', e.target.value)} type='number' value={expense.amount} />
+      <button onClick={handleExpense}>Add expense</button>
     </section>
   );
 };

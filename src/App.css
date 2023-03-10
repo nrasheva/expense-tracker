@@ -12,5 +12,17 @@
 }
 
 .expense span {
+  border: 1px solid silver;
+}
+
+.expense span:nth-child(1) {
+  width: 10rem;
+}
+
+.expense span:nth-child(2) {
+  width: 15rem;
+}
+
+.expense span:nth-child(3) {
   width: 10rem;
 }
