@@ -2,3 +2,15 @@
   display: flex;
   flex-direction: column;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.expense {
+  display: flex;
+}
+
+.expense span {
+  width: 10rem;
+}

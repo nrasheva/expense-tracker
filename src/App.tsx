@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { Expenses } from './components/_index';
 import { add, differenceInDays, isBefore, startOfDay } from 'date-fns';
 
 function App() {
@@ -50,11 +51,11 @@ function App() {
   return (
     <div className='app'>
       <div>
-        <p>Account</p>
+        <h3>Account</h3>
         <input min='1' onChange={(e) => handleAccount(e.target.value)} step='any' type='number' value={account} />
       </div>
       <div>
-        <p>What day do you get paid?</p>
+        <p className='bold'>What day do you get paid?</p>
         <input
           max='31'
           min='1'
@@ -69,10 +70,12 @@ function App() {
       {Boolean(remainingDays.length) && <h2>{remainingDays}</h2>}
       {nextIncome}
       <div>
-        <p>How much do you want to save?</p>
+        <p className='bold'>How much do you want to save?</p>
         <input min='1' onChange={(e) => setSavings(e.target.value)} step='any' type='number' value={savings} />
       </div>
       {Number(savings) / Number(remainingDays.split(' ')[0])}
+
+      <Expenses />
     </div>
   );
 }
