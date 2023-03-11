@@ -1,17 +1,14 @@
 import { useState } from 'react';
-
-type Category = { id: number; name: string };
-
-const CATEGORIES: Category[] = [
-  { id: 0, name: 'groceries' },
-  { id: 1, name: 'rent' },
-  { id: 2, name: 'food' },
-];
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { setCategories } from '../redux/reducers/user';
 
 export const Categories = (): JSX.Element => {
-  const [categories, setCategories] = useState(CATEGORIES);
   const [name, setName] = useState('');
   const [conflict, setConflict] = useState(false);
+
+  const categories = useAppSelector((state) => state.user.categories);
+
+  const dispatch = useAppDispatch();
 
   const handleChange = (name: string): void => {
     setName(name);
@@ -26,7 +23,7 @@ export const Categories = (): JSX.Element => {
       name: name,
     };
 
-    setCategories([...categories, newCategory]);
+    dispatch(setCategories([...categories, newCategory]));
     setName('');
   };
 

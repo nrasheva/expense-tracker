@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAppSelector } from '../hooks';
 import { convertTimestamp, formatCurrency } from '../tools';
 
 type Expense = {
@@ -84,6 +85,8 @@ export const Expenses = (): JSX.Element => {
     category: '',
   });
 
+  const categories = useAppSelector((state) => state.user.categories);
+
   const handleChange = (key: string, value: string) => {
     setExpense((prevState) => {
       return { ...prevState, [key]: value };
@@ -116,7 +119,12 @@ export const Expenses = (): JSX.Element => {
 
       {expenses.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0) / 100}
       <p className='bold'>Add new expense</p>
-      <input onChange={(e) => handleChange('category', e.target.value)} type='text' value={expense.category} />
+      <label htmlFor='categories'>Choose a category</label>
+      <select id='categories' onChange={(e) => handleChange('category', e.target.value)}>
+        {categories.map((category) => {
+          return <option value={category.id}>{category.name}</option>;
+        })}
+      </select>
       <input onChange={(e) => handleChange('amount', e.target.value)} type='number' value={expense.amount} />
       <button onClick={handleExpense}>Add expense</button>
     </section>
