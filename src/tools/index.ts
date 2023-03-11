@@ -1,10 +1,10 @@
 export const convertTimestamp = (timestamp: number): string => {
   const options: Intl.DateTimeFormatOptions = {
     day: '2-digit',
-    month: 'long',
-    timeZone: 'Europe/Sofia',
     hour: '2-digit',
     minute: '2-digit',
+    month: 'long',
+    timeZone: 'Europe/Sofia',
     year: 'numeric',
   };
 

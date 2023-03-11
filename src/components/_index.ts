@@ -1,3 +1,4 @@
+import { Categories } from './Categories';
 import { Expenses } from './Expenses';
 
-export { Expenses };
+export { Categories, Expenses };

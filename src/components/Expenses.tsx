@@ -51,6 +51,30 @@ const EXPENSES: Expense[] = [
     id: '7b391ac2-2f48-41c4-912e-32a7a7b0fc6e',
     timestamp: 1678429080,
   },
+  {
+    amount: '1425',
+    category: 'groceries',
+    id: '11b8b79c-2eb2-4db3-b65f-1ea2006f6e1e',
+    timestamp: 1678460160,
+  },
+  {
+    amount: '260',
+    category: 'groceries',
+    id: 'c0b5d8b9-1c67-4cef-bfa7-e7eed9c1b509',
+    timestamp: 1678461060,
+  },
+  {
+    amount: '548',
+    category: 'groceries',
+    id: '59ee99f6-6cf8-42c6-b708-4e2b3f78c3cf',
+    timestamp: 1678517760,
+  },
+  {
+    amount: '2176',
+    category: 'groceries',
+    id: '8aa9bee8-9606-441c-bb61-2b8a95da842a',
+    timestamp: 1678531320,
+  },
 ];
 
 export const Expenses = (): JSX.Element => {
@@ -89,6 +113,8 @@ export const Expenses = (): JSX.Element => {
           </div>
         );
       })}
+
+      {expenses.reduce((accumulator, currentValue) => accumulator + Number(currentValue.amount), 0) / 100}
       <p className='bold'>Add new expense</p>
       <input onChange={(e) => handleChange('category', e.target.value)} type='text' value={expense.category} />
       <input onChange={(e) => handleChange('amount', e.target.value)} type='number' value={expense.amount} />
