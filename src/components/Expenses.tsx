@@ -76,6 +76,18 @@ const EXPENSES: Expense[] = [
     id: '8aa9bee8-9606-441c-bb61-2b8a95da842a',
     timestamp: 1678531320,
   },
+  {
+    amount: '2176',
+    category: 'groceries',
+    id: 'a04108b7-540f-497b-bcfd-fc4386ac15aa',
+    timestamp: 1678531320,
+  },
+  {
+    amount: '2862',
+    category: 'groceries',
+    id: '4ca43b21-650f-44d9-b96b-555627e81416',
+    timestamp: 1678620600,
+  },
 ];
 
 export const Expenses = (): JSX.Element => {
@@ -87,7 +99,7 @@ export const Expenses = (): JSX.Element => {
 
   const categories = useAppSelector((state) => state.user.categories);
 
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string, value: string): void => {
     setExpense((prevState) => {
       return { ...prevState, [key]: value };
     });
@@ -122,7 +134,7 @@ export const Expenses = (): JSX.Element => {
       <label htmlFor='categories'>Choose a category</label>
       <select id='categories' onChange={(e) => handleChange('category', e.target.value)}>
         {categories.map((category) => {
-          return <option value={category.id}>{category.name}</option>;
+          return <option key={category.id} value={category.id}>{category.name}</option>;
         })}
       </select>
       <input onChange={(e) => handleChange('amount', e.target.value)} type='number' value={expense.amount} />

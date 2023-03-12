@@ -1,31 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import { Categories, Expenses } from './components/_index';
+import { Accounts, Categories, Expenses } from './components/_index';
 import { add, differenceInDays, isBefore, startOfDay } from 'date-fns';
 
 function App() {
-  const [account, setAccount] = useState('');
   const [selectedDate, setSelectedDate] = useState(1);
   const [checked, setChecked] = useState(false);
   const [nextIncome, setNextIncome] = useState('');
   const [remainingDays, setRemainingDays] = useState('');
   const [savings, setSavings] = useState('');
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const savedAccount = localStorage.getItem('account');
-
-    if (savedAccount) {
-      setAccount(savedAccount);
-    }
-  }, []);
-
-  const handleAccount = (amount: string): void => {
-    setAccount(amount);
-    localStorage.setItem('account', amount);
-  };
 
   const handleConfirmation = (): void => {
     // Get midnight UTC date of user selection
@@ -55,10 +40,7 @@ function App() {
     <Provider store={store}>
       <div className='app'>
         <div className='column'>
-          <div>
-            <h3>Account</h3>
-            <input min='1' onChange={(e) => handleAccount(e.target.value)} step='any' type='number' value={account} />
-          </div>
+          <Accounts />
           <div>
             <p className='bold'>What day do you get paid?</p>
             <input
