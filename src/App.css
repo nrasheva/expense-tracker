@@ -1,11 +1,13 @@
-.app {
-  display: flex;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.column {
+.app {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  padding: 2rem 4rem;
 }
 
 .bold {
