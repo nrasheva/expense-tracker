@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useAppSelector } from '../hooks';
 import { convertTimestamp, formatCurrency } from '../tools';
 
@@ -112,9 +112,40 @@ const EXPENSES: Expense[] = [
     id: '61c9d440-eee9-41bc-b6b8-b03f8d77609c',
     timestamp: 1678987080,
   },
+  {
+    amount: 2800,
+    category: 'going-out',
+    id: '2f040155-2e82-4117-b835-cf8bee24e728',
+    timestamp: 1679091000,
+  },
+  {
+    amount: 2000,
+    category: 'going-out',
+    id: '75ad0193-1518-45e9-adb9-eb8510df014e',
+    timestamp: 1679092200,
+  },
+  {
+    amount: 1200,
+    category: 'going-out',
+    id: 'd606641d-1c99-407f-97bd-f0f18ff456ce',
+    timestamp: 1679093160,
+  },
+  {
+    amount: 4000,
+    category: 'going-out',
+    id: 'e8730623-1561-4c7a-a4d3-e4d9e3dfbf78',
+    timestamp: 1679098740,
+  },
+  {
+    amount: 657,
+    category: 'groceries',
+    id: '83b3eed9-7352-490f-af62-212705caf18e',
+    timestamp: 1679137380,
+  },
 ];
 
 export const Expenses = (): JSX.Element => {
+  const [view, setView] = useState<'detailed' | 'grouped'>('grouped');
   const [expenses, setExpenses] = useState(EXPENSES);
   const [expense, setExpense] = useState({
     amount: '',
@@ -122,6 +153,28 @@ export const Expenses = (): JSX.Element => {
   });
 
   const categories = useAppSelector((state) => state.user.categories);
+
+  const groupedExpenses = useMemo(() => {
+    const groups = expenses.reduce((accumulator: { [key: string]: number[] }, { amount, category }) => {
+      accumulator[category] = accumulator[category] ?? [];
+      accumulator[category].push(amount);
+
+      return accumulator;
+    }, {});
+
+    const grouped = [];
+
+    for (const group in groups) {
+      const newGroup = {
+        amount: groups[group].reduce((accumulator, currentValue) => accumulator + currentValue, 0),
+        group: group,
+      };
+
+      grouped.push(newGroup);
+    }
+
+    return grouped;
+  }, []);
 
   const handleChange = (key: string, value: string): void => {
     setExpense((prevState) => {
@@ -142,18 +195,24 @@ export const Expenses = (): JSX.Element => {
 
   return (
     <section>
-      <h3>Expenses</h3>
-      {expenses.map((expense) => {
-        return (
-          <div className='expense' key={expense.id}>
-            <span>{expense.category}</span>
-            <span>{convertTimestamp(expense.timestamp)}</span>
-            <span>{formatCurrency(expense.amount.toString())}</span>
-          </div>
-        );
-      })}
+      <button onClick={() => setView(view === 'detailed' ? 'grouped' : 'detailed')}>
+        {view === 'detailed' ? 'grouped' : 'detailed'}
+      </button>
+      {view === 'detailed' ? (
+        expenses.map((expense) => {
+          return (
+            <div className='expense' key={expense.id}>
+              <span>{expense.category}</span>
+              <span>{convertTimestamp(expense.timestamp)}</span>
+              <span>{formatCurrency(expense.amount.toString())}</span>
+            </div>
+          );
+        })
+      ) : (
+        <>{JSON.stringify(groupedExpenses)}</>
+      )}
 
-      {expenses.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) / 100}
+      {/* {expenses.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) / 100} */}
       <p className='bold'>Add new expense</p>
       <label htmlFor='categories'>Choose a category</label>
       <select id='categories' onChange={(e) => handleChange('category', e.target.value)}>

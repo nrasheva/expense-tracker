@@ -63,7 +63,6 @@ export const Accounts = () => {
 
   return (
     <div>
-      <h3>Accounts</h3>
       <p className='bold'>Create account</p>
       <input
         min='1'

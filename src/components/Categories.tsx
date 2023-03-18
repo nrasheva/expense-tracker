@@ -29,7 +29,6 @@ export const Categories = (): JSX.Element => {
 
   return (
     <div>
-      <h3>Categories</h3>
       {categories.map((category) => {
         return <div key={category.id}>{category.name}</div>;
       })}
