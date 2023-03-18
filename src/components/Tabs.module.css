@@ -1,0 +1,16 @@
+.tabs {
+  border-bottom: 1px solid silver;
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding-bottom: 1rem;
+}
+
+.tab {
+  cursor: pointer;
+  font: 400 1rem 'Source Sans Pro';
+}
+
+.tab:hover {
+  color: red;
+}
