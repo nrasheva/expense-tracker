@@ -1,5 +1,9 @@
-export const formatCurrency = (amount: string): string => {
-  const currency = new Intl.NumberFormat('es-ES', { currency: 'BGN', style: 'currency' }).format(Number(amount) / 100);
+export const formatCurrency = (amount: number): string => {
+  const currency = new Intl.NumberFormat('es-ES', {
+    currency: 'EUR',
+    currencyDisplay: 'code',
+    style: 'currency',
+  }).format(amount / 100);
 
   return currency;
 };

@@ -1,0 +1,16 @@
+.accounts-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.account {
+  border-radius: 0.5rem;
+  flex: 1;
+  padding: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .accounts-container {
+    flex-direction: column;
+  }
+}

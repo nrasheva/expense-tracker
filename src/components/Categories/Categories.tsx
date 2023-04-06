@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { setCategories } from '../redux/reducers/user';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCategories } from '../../redux/reducers/user';
 
 export const Categories = (): JSX.Element => {
   const [name, setName] = useState('');

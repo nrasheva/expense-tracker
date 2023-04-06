@@ -1,4 +1,4 @@
-import styles from './Tabs.module.css';
+import styles from './Tabs.module.scss';
 
 type TabsProps = {
   activeTab: string;
@@ -15,7 +15,7 @@ export const Tabs = (props: TabsProps): JSX.Element => {
             className={styles.tab}
             key={tab}
             onClick={() => props.handleTabClick(tab)}
-            style={{ color: tab === props.activeTab ? 'blue' : 'black' }}
+            style={{ color: tab === props.activeTab ? '#5a64d7' : 'black' }}
           >
             {tab}
           </div>

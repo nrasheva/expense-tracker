@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import './App.css';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { Accounts, Categories, Expenses, Tabs } from '@/components/_index';
 
 const TABS = ['accounts', 'categories', 'expenses'];
 
-function App() {
+export const App = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(TABS[0]);
 
   return (
@@ -20,6 +19,4 @@ function App() {
       </div>
     </Provider>
   );
-}
-
-export default App;
+};
