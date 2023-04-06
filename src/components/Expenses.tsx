@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useAppSelector } from '../hooks';
-import { convertTimestamp, formatCurrency } from '../tools';
+import { formatCurrency, formatTimestamp } from '../tools';
 
 type Expense = {
   amount: number;
@@ -142,6 +142,132 @@ const EXPENSES: Expense[] = [
     id: '83b3eed9-7352-490f-af62-212705caf18e',
     timestamp: 1679137380,
   },
+  {
+    amount: 300,
+    category: 'commissions',
+    id: 'e44db2df-74c3-4ac1-835e-5a33c7d32afa',
+    timestamp: 1679355180,
+  },
+  {
+    amount: 139,
+    category: 'groceries',
+    id: '710620a8-6e59-4b87-93a0-b14b1178efc8',
+    timestamp: 1679383800,
+  },
+  {
+    amount: 5000,
+    category: 'multisport',
+    id: 'aa4f703c-039e-41fd-aff0-e347a9d6efa5',
+    timestamp: 1679384640,
+  },
+  {
+    amount: 1106,
+    category: 'groceries',
+    id: '3a5e7579-6d6e-4c45-bae7-73bbfb228e3a',
+    timestamp: 1679504820,
+  },
+  {
+    amount: 1500,
+    category: 'revolut',
+    id: '650214d0-a413-4ee1-9895-4e87b2f6f9d1',
+    timestamp: 1679589060,
+  },
+  {
+    amount: 2900,
+    category: 'going-out',
+    id: 'ac7585b3-be89-478f-a4f6-562b1a4ff832',
+    timestamp: 1679603580,
+  },
+  {
+    amount: 1089,
+    category: 'vitamins',
+    id: '306fbc36-8561-4eff-ad64-30735079ff9f',
+    timestamp: 1679643960,
+  },
+  {
+    amount: 1300,
+    category: 'food',
+    id: '1b9518a2-9734-4a89-a527-fd72c067ea55',
+    timestamp: 1679654040,
+  },
+  {
+    amount: 8000,
+    category: 'car',
+    id: '78535a6b-f4bf-48d5-ae33-509ee31f0e37',
+    timestamp: 1679733300,
+  },
+  {
+    amount: 43733,
+    category: 'hotels',
+    id: '32918ad2-382c-4f3b-9df8-453f83ad3463',
+    timestamp: 1679780700,
+  },
+  {
+    amount: 1480,
+    category: 'food',
+    id: 'fa1983bd-f21d-41aa-ba75-e5c9fde668e3',
+    timestamp: 1679850360,
+  },
+  {
+    amount: 1300,
+    category: 'food',
+    id: 'c3531cc3-1313-41cf-9e46-20a9a6c3d65a',
+    timestamp: 1679915340,
+  },
+  {
+    amount: 940,
+    category: 'groceries',
+    id: '8c55483d-ce0b-4192-8293-89ac0e707f58',
+    timestamp: 1680000840,
+  },
+  {
+    amount: 1168,
+    category: 'groceries',
+    id: '55a7fd31-8088-487d-9e13-484890393328',
+    timestamp: 1680007560,
+  },
+  {
+    amount: 2343,
+    category: 'vacations',
+    id: 'ef429070-b153-4cee-9123-667f19db6e21',
+    timestamp: 1680075120,
+  },
+  {
+    amount: 2966,
+    category: 'vacations',
+    id: '34aa3f00-db80-4784-b531-f7ed6dc807e9',
+    timestamp: 1680178680,
+  },
+  {
+    amount: 979,
+    category: 'vacations',
+    id: '709f9715-d4e3-43b0-a2ea-2d09c41c0f74',
+    timestamp: 1680286200,
+  },
+  {
+    amount: 15300,
+    category: 'hosting',
+    id: '9f54f2cc-d6da-4aa2-b563-dc9f1fca1fed',
+    timestamp: 1680333660,
+  },
+  {
+    amount: 1709,
+    category: 'vacations',
+    id: 'd1b19f40-88b7-4713-930c-9e10d7a15570',
+    timestamp: 1680359580,
+  },
+  {
+    amount: 1500,
+    category: 'food',
+    id: 'afc65bf9-a25a-40a8-8aee-68f5bb9ed30a',
+    timestamp: 1680440040,
+  },
+  {
+    amount: 1613,
+    category: 'groceries',
+    id: '3df8db39-b35a-450c-ac33-f06e6b569562',
+    timestamp: 1680515760,
+  },
 ];
 
 export const Expenses = (): JSX.Element => {
@@ -203,16 +329,25 @@ export const Expenses = (): JSX.Element => {
           return (
             <div className='expense' key={expense.id}>
               <span>{expense.category}</span>
-              <span>{convertTimestamp(expense.timestamp)}</span>
+              <span>{formatTimestamp(expense.timestamp)}</span>
               <span>{formatCurrency(expense.amount.toString())}</span>
             </div>
           );
         })
       ) : (
-        <>{JSON.stringify(groupedExpenses)}</>
+        <>
+          {groupedExpenses.map((expense) => {
+            return (
+              <div className='expense' key={expense.group}>
+                <span>{expense.group}</span>
+                <span>{formatCurrency(expense.amount.toString())}</span>
+              </div>
+            );
+          })}
+        </>
       )}
 
-      {/* {expenses.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) / 100} */}
+      {expenses.reduce((accumulator, currentValue) => accumulator + currentValue.amount, 0) / 100}
       <p className='bold'>Add new expense</p>
       <label htmlFor='categories'>Choose a category</label>
       <select id='categories' onChange={(e) => handleChange('category', e.target.value)}>
