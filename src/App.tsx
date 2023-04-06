@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
-import { Accounts, Categories, Expenses, Tabs } from './components/_index';
+import { store } from '@/redux/store';
+import { Accounts, Categories, Expenses, Tabs } from '@/components/_index';
 
 const TABS = ['accounts', 'categories', 'expenses'];
 
