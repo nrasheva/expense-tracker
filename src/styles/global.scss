@@ -16,3 +16,21 @@
     padding: 2rem;
   }
 }
+
+button {
+  @extend .font-m;
+  background: #5a64d7;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  height: 3rem;
+  padding: 0 2rem;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid rgb(165, 170, 170);
+  height: 2.5rem;
+  padding: 0 1rem;
+}

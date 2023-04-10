@@ -1,11 +1,11 @@
-export const formatCurrency = (amount: number): string => {
-  const currency = new Intl.NumberFormat('es-ES', {
-    currency: 'EUR',
+export const formatCurrency = (amount: number, currency: string): string => {
+  const formatted = new Intl.NumberFormat('es-ES', {
+    currency: currency,
     currencyDisplay: 'code',
     style: 'currency',
   }).format(amount / 100);
 
-  return currency;
+  return formatted;
 };
 
 export const formatTimestamp = (timestamp: number): string => {

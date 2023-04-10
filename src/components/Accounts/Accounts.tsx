@@ -29,7 +29,7 @@ export const Accounts = () => {
           return (
             <div className={styles.account} key={account.id} style={{ backgroundColor: account.color }}>
               <h2 className='white'>{account.name}</h2>
-              <p className='font-m white'>{formatCurrency(account.balance)}</p>
+              <h1 className='white'>{formatCurrency(account.balance, account.currency)}</h1>
             </div>
           );
         })}
